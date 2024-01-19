@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>login.html</title>
+</head>
+<body>
+	<h1>Login Page</h1>
+	<!-- 
+	POST는 무조건 form태그 사용
+	- GET 방식은 url 주소창에 사용자가 입력한 value가 나옴
+		= 자유롭게 공개될 수 있는 게시물 ex) 유튜브 구독한 채널 주소, 네이버 블로그...
+	- POST 방식은 그걸 숨겨줌(POST 방식은 대용량도 전달 가능)
+	 -->
+	 <!-- GET방식 -->
+	 <a href="loginSubmit.jsp?uid=id001&upw=pw001">로그인 요청</a>
+	 
+	<form action="login" method="POST">
+		<!-- input엔 value가 사용자가 작성한 값 -->
+		아이디 : <input type="text" name="uid"/><br/>
+		비밀번호 : <input type="password" name="upw"/><br/>
+		<!-- POST 방식 -->
+		<input type="submit" value="로그인"/><br/>
+		<input type="button" value="일반버튼"/><br/>
+		<input type="reset" value="리셋버튼"/>
+	</form>
+</body>
+</html>
