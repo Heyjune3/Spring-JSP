@@ -4,54 +4,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <!-- joinCheck.jsp -->
-<%request.setCharacterEncoding("utf-8");%>
-
 <%
-	// application에 회원 목록 저장 리스트 생성
+	request.setCharacterEncoding("utf-8");
+
+	// ServletContext(application) 영역에 회원 목록 정보를 저장
 	List<MemberVO> memberList = (List<MemberVO>)application.getAttribute("memberList");
+	// 아직 등록된 회원 정보가 존재 하지 않음
 	if(memberList == null){
 		memberList = new ArrayList<>();
 		application.setAttribute("memberList", memberList);
 	}
 	
+	// 회원가입에 필요한 파라미터 정보를 이용해서 회원가입 요청 처리
+	
+	// 사용자가 입력창에 입력한 파라미터들 중에 name 값이 id 값을 읽어옴.
 	String id = request.getParameter("id");
-	String pw = request.getParameter("pw");
+	
+	// 등록된 회원들 중에 동일한 id를 사용하고 있는 사용자가 존재하는지 확인
+	// 중복 아이디 체크
+	MemberVO member = new MemberVO(id);
+	
+	// 회원목록에 등록된 회원 정보가 하나라도 존재하면(memberList가 비어있지 않으면)
+	if(!memberList.isEmpty() && memberList.contains(member)){
+		// memberList에  매개변수로 전달된 member와 id가 일치하는 회원정보가 존재함.
+%>
+	<script>
+		alert('이미 사용중인 아이디입니다.');
+		history.go(-1);
+	</script>
+<%		
+		return; // 회원 가입 요청 처리를 하지 않도록 servlet의 service method 즉시 종료
+	}
+	
+	// 사용가능한 아이디 - 회원가입 요청 처리(회원등록)
+	// 회원등록에 필요한 파라미터 정보를 읽어오기
+	String pass = request.getParameter("pass");
 	String name = request.getParameter("name");
 	String addr = request.getParameter("addr");
 	String phone = request.getParameter("phone");
 	String gender = request.getParameter("gender");
-	int age = Integer.parseInt(request.getParameter("age"));
+	String strAge = request.getParameter("age");
+	int age = Integer.parseInt(strAge); // 등록할 정수타입으로 변경
 	
-	// VO에 등록할 신규 회원 정보
-	MemberVO joinMember = new MemberVO(id, pw, name, addr, phone, gender, age);
+	// 읽어온 파라미터 정보를 회원 정보에 추가할 member field에 저장
+	member.setPass(pass);
+	member.setAddr(addr);
+	member.setName(name);
+	member.setPhone(phone);
+	member.setGender(gender);
+	member.setAge(age);
 	
-	String method = request.getMethod();
-	String message = "정상적인 접근 방식이 아닙니다.";
-	String nextPage = "join.jsp";
-	// 회원가입 POST만 가능
-	if(!method.equalsIgnoreCase("GET")){
-		boolean isCheck = false;
-		for(MemberVO m : memberList){
-			if(m.getId().equals(id)){
-			isCheck = true;
-			break;
-			}
-		}
-		// 중복처리 및 회원가입 완료
-		if(isCheck){
-			message = "이미 사용중인 아이디입니다.";
-			nextPage = "join.jsp";
-		}else{
-		memberList.add(joinMember);
-		message = "회원 가입 완료!";
-		nextPage = "login.jsp";
-		}
-	}// GET or POST 요청 처리 완료
+	// 회원 목록에 새롭게 생성된 회원 정보 추가
+	memberList.add(member);
 	
-	request.setAttribute("message", message);
-	request.getRequestDispatcher(nextPage).forward(request, response);
-	
+	// TODO 삭제 예정
+	System.out.println("===============================================");
+	System.out.println(application.getAttribute("memberList"));	
+	System.out.println("===============================================");
 %>
+<!-- 정상정으로 회원정보가 등록이 완료되었으면 로그인 페이지로 이동 -->
+<script>
+	alert('회원가입 성공');
+	location.href="login.jsp";
+</script>
+
+
+
+
+
+
+
+
+
+
 
 
 

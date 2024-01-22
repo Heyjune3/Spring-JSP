@@ -7,17 +7,6 @@ public class MemberVO {
 	private String name;
 	private String addr;
 	private String phone;
-	
-	public MemberVO(String id, String pass, String name, String addr, String phone, String gender, int age) {
-		this.id = id;
-		this.pass = pass;
-		this.name = name;
-		this.addr = addr;
-		this.phone = phone;
-		this.gender = gender;
-		this.age = age;
-	}
-
 	private String gender;
 	private int age;
 
