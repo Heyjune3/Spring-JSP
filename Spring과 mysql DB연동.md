@@ -53,3 +53,28 @@
 	%>
 ```
 - Connection 연결 확인 = Server 실행
+
+
+### mysql 파일 eclipse로 열기
+- help -> install new Software -> https://download.eclipse.org/releases/2023-09/ <br/>-> Database Development -> 다운로드 목록 확인 후 Finish -> selectAll
+- Window ->  show View -> Data Source Explorer
+	- 밑의 console 창에 Data Source Explorer 창 생성
+	- 창 내의 Database Connections에 우클릭 후 New..
+	- Mysql 지정 후 next 
+	- Database : 사용할 데이터베이스 이름 지정
+	- URL : ex> jdbc:mysql://localhost:3306/database
+	- User name : 사용자 이름 지정
+	- password : 비밀번호
+- 상단 Drivers 콤보박스 우측에 New Driver Definition
+	- Name/Type : 사용할 Mysql Driver 클릭 ex> 5.1
+	- JAR List : 원래 있던 파일 Remove JAR/Zip <br/>
+	-> Add JAR/Zip -> mysql-connector-J 파일 등록
+- Test Connection 후 Finish
+- Data Source Explorer에 New MySQL 우측 클릭 후 Connect
+#### mysql 파일 생성
+- Project Explorer에 New -> SQLfile 생성
+	- File name : 파일 이름
+	- Database server type : MySQL 5.1
+	- Connection profile name : 위의 생성된 New MYSQL
+	- Database name : 위의 지정한 데이터베이스 이름
+	- Finish
