@@ -78,3 +78,8 @@
 	- Connection profile name : 위의 생성된 New MYSQL
 	- Database name : 위의 지정한 데이터베이스 이름
 	- Finish
+#### mysql Connector-J 추가
+- mysql Connector -j .jar 파일을 Servers에 추가
+- apache-tomcat 압축 해제한 폴더 -> lib
+- mysql Connector -j .jar 붙여넣기
+- 서버 내 모든 프로젝트에 mysql Connecor-j 가 들어가짐
