@@ -1,6 +1,4 @@
 USE develop;
--- 실행할 쿼리 문 블럭 지정 후 alt + x, or alt + c
--- 또는 실행할 쿼리 문 블럭 지정 후 우클릭 execute selected text 선택
 SHOW TABLES;
 -- member_test.sql
 CREATE TABLE IF NOT EXISTS member(

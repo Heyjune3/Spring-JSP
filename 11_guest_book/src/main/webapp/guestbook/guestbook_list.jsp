@@ -57,6 +57,7 @@
 		// 테이블에 pageCount만큼 검색할 limit의 시작 인덱스 번호
 		int startRow = 0;
 		
+		// 사용자가 요청한 페이지를 page라는 파라미터 이름으로 전달
 		String paramPage = request.getParameter("page");
 		if(paramPage != null){
 			currentPage = Integer.parseInt(paramPage);
