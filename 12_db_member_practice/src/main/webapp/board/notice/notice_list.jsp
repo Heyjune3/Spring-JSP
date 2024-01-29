@@ -99,7 +99,7 @@
 			</tr>
 			<%} %>
 			<!-- 페이징 처리 -->
-			<tr>
+	<tr>
 		<th colspan="4">
 		<%if(pm.isFirst()){ %>
 			<a href="<%=pm.makeQuery(1) %>">[처음]</a>

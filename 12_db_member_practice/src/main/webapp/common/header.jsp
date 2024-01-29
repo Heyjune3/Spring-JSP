@@ -81,7 +81,7 @@
 			<ul>
 				<li><a href="<%=path %>/index.jsp">home</a></li>
 				<li><a href="<%=path %>/board/notice/notice_list.jsp">공지사항</a></li>
-				<li><a href="#">질문과답변</a></li>
+				<li><a href="<%=path %>/board/qna/qna_list.jsp">질문과답변</a></li>
 			</ul>
 		</div>
 		<div>
