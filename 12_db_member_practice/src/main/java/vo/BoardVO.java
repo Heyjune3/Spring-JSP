@@ -22,6 +22,8 @@ public class BoardVO {
 	private int qna_readcount;
 	private Date qna_date;
 	
+	private char qna_delete;	// 게시글 삭제 요청 여부
+	
 	/**
 	 * 답변 용 컬럼이 추가된 생성자 
 	 */
@@ -39,6 +41,7 @@ public class BoardVO {
 		this.qna_date = qna_date;
 	}
 	
+
 	public BoardVO() {
 	}
 	
@@ -141,6 +144,14 @@ public class BoardVO {
 
 	public void setQna_date(Date qna_date) {
 		this.qna_date = qna_date;
+	}
+	
+	public char getQna_delete() {
+		return qna_delete;
+	}
+	
+	public void setQna_delete(char qna_delete) {
+		this.qna_delete = qna_delete;
 	}
 
 	@Override

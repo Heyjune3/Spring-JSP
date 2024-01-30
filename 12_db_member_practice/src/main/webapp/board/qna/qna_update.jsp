@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/common/header.jsp"%>
+<!-- qna_update.jsp -->
+<%@ include file="/common/header.jsp" %>
 <%@ page import="java.sql.*, vo.*, util.*" %>
 <%
 	// 상세보기 요청한 게시글 번호
@@ -20,6 +21,7 @@
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, qna_num);
 		rs = pstmt.executeQuery();
+		
 		if(rs.next()){
 			board = new BoardVO(
 				rs.getInt(1),
@@ -28,7 +30,10 @@
 				rs.getString(4),
 				rs.getInt(5),
 				rs.getInt(6),
-				rs.getTimestamp(7)
+				rs.getInt(7),
+				rs.getInt(8),
+				rs.getInt(9),
+				rs.getTimestamp(10)
 			);
 		}
 	}catch(Exception e){
@@ -40,7 +45,7 @@
 <section>
 	<form action="qna_update_submit.jsp" method="POST">
 		<input type="hidden" name="qna_num" value="<%=board.getQna_num()%>"/>
-		<input type="hidden" name="qna_write_num" value="<%=board.getQna_write_num()%>"/>
+		<input type="hidden" name="qna_write_num" value="<%=loginMember.getNum()%>"/>
 		<table>
 			<tr>
 				<th colspan="2"><h1>게시글 수정</h1></th>
@@ -48,19 +53,20 @@
 			<tr>
 				<td>작성자</td>
 				<td>
-					<input type="text" name="qna_name" value="<%=loginMember.getName()%>" readonly/>
+					<input type="text" name="qna_name" 
+						   value="<%=loginMember.getName()%>" readonly/>
 				</td>
 			</tr>
 			<tr>
 				<td>글 제목</td>
 				<td>
-					<input type="text" name="qna_title" value="<%=board.getQna_title()%>" autofocus required/>
+					<input type="text" name="qna_title" value="<%=board.getQna_title()%>" autofocus required />
 				</td>
 			</tr>
 			<tr>
 				<td>글 내용</td>
 				<td>
-					<textarea name="qna_content" required rows="10" cols="50"><%=board.getQna_content()%></textarea>
+					<textarea name="qna_content" required cols="50" rows="10"><%=board.getQna_content()%></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -72,4 +78,17 @@
 		</table>
 	</form>
 </section>
-<%@ include file="/common/footer.jsp"%>
+<%@ include file="/common/footer.jsp" %>
+
+
+
+
+
+
+
+
+
+
+
+
+

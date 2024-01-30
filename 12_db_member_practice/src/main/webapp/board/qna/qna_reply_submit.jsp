@@ -19,8 +19,7 @@
 			  + " WHERE qna_re_ref = ? AND qna_re_seq > ? ";
 			  
 	String insertSql = "INSERT INTO qna_board " 
-			         +" VALUES(null,?,?,?,?,?,?,?,0,now())";		
-	
+			         +" VALUES(null,?,?,?,?,?,?,?,0,now(),'N')";		  
     try{
     	conn.setAutoCommit(false);
     	pstmt = conn.prepareStatement(sql);
@@ -43,7 +42,6 @@
     	conn.commit();
     }catch(Exception e){
     	conn.rollback();
-    	e.printStackTrace();
     }finally{
     	conn.setAutoCommit(true);
     	JDBCUtil.close(pstmt, conn);
