@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- context.xml -->
+<Context>
+	<Resource name="java/MySQL_DBCP"
+			  auth="container" 
+			  type="javax.sql.DataSource" 
+			  factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" 
+			  driverClassName="com.mysql.cj.jdbc.Driver" 
+			  url="jdbc:mysql://localhost:3306/develop" 
+			  username="developer" 
+			  password="12345" 
+			  initialSize="10"
+			  maxActive="200"
+			  maxWait="60000"
+			  maxIdle="100"
+			  minIdle="10" />
+</Context>
+
+
+
+
+
+
+
+
+
+
