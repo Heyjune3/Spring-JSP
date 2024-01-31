@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 public interface DBCPUtil {
 	
 	/**
-	 * @return connection pool 에서 connection 반환 
+	 * @return connection pool 에서 connection 반환
 	 */
 	public static Connection getConnection() {
 		Connection conn = null;
@@ -27,11 +27,11 @@ public interface DBCPUtil {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return conn;
 	}
+	
 	/**
-	 * 외부 자원과 연결된 객체의 자원해제 
+	 * 외부 자원과 연결된 객체의 자원해제
 	 */
 	public static void close(AutoCloseable... closer) {
 		for(AutoCloseable c  : closer) {
@@ -42,4 +42,14 @@ public interface DBCPUtil {
 			} // not null 
 		} // end for
 	} // end close
+	
 }
+
+
+
+
+
+
+
+
+
