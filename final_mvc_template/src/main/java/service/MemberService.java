@@ -1,9 +1,14 @@
 package service;
 
+import beans.MemberVO;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import repositories.MemberDAO;
+import repositories.MemberDAOImpl;
 
-public interface MemberService {
+public interface MemberService extends FindPassService{
 
 	/**
 	 * 회원가입 처리
@@ -41,6 +46,20 @@ public interface MemberService {
 	 * @param request
 	 */
 	static void loginCheck(HttpServletRequest request) {
-		
+		Cookie[] cookies = request.getCookies();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("member") == null && cookies != null) {
+			for(Cookie c : cookies) {
+				if(c.getName().equals("id")) {
+					String id = c.getValue();
+					MemberDAO dao = new MemberDAOImpl();
+					MemberVO member = dao.getMemberById(id);
+					if(member != null) {
+						session.setAttribute("member", member);
+					}
+					break; // for문 종료
+				}
+			}
+		}
 	}
 }

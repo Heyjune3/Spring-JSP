@@ -13,7 +13,7 @@
 		</tr>
 		<tr>
 			<td>아이디</td>
-			<td><input type="text" name="id" required placeholder="ID 작성" /></td>
+			<td><input type="email" name="id" required placeholder="ID 작성" /></td>
 		</tr>
 		<tr>
 			<td>비밀번호</td>
@@ -62,8 +62,12 @@
 		var u_re_pass = document.getElementById("re_pass");
 		var u_age = form.age;
 		
-		if(u_id.value.length > 12 || u_id.value.length < 4){
-			alert('아이디는 4~12글자이내에서 작성해 주세요.');
+		var regexEmail =/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;       // 이메일
+		
+		console.log(regexEmail.test(u_id.value));
+		
+		if(!regexEmail.test(u_id.value)){
+			alert('아이디는 이메일 형식으로 작성해주세요.');
 			u_id.value = "";
 			u_id.focus();
 		}else if(u_pass.value.length > 8 || u_pass.value.length < 4){

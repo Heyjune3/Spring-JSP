@@ -24,6 +24,7 @@
 		<tr>
 			<td colspan="2">
 				<input type="submit" value="로그인" />
+				<input type="button" onclick="location.href='findPass.mc';" value="비밀번호 찾기" />
 			</td>
 		</tr>
 	</table>

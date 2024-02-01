@@ -16,19 +16,32 @@
     <error-code>405</error-code>
     <location>/error/error_405.jsp</location>
   </error-page>
-  
   <servlet>
     <servlet-name>MemberController</servlet-name>
     <servlet-class>controller.MemberController</servlet-class>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>MemberController</servlet-name>
     <url-pattern>*.mc</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MainServlet</display-name>
+    <servlet-name>MainServlet</servlet-name>
+    <servlet-class>controller.MainServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MainServlet</servlet-name>
+    <url-pattern>/main</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GoogleMailTest</display-name>
+    <servlet-name>GoogleMailTest</servlet-name>
+    <servlet-class>controller.GoogleMailTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoogleMailTest</servlet-name>
+    <url-pattern>/googleMailTest</url-pattern>
+  </servlet-mapping>
 </web-app>
-
-
-
-
-

@@ -89,4 +89,15 @@ CREATE TABLE IF NOT EXISTS qna(
 	CONSTRAINT fk_member_writer FOREIGN KEY(qna_writer_num) REFERENCES mvc_member(num)
 );
 
+-- 비밀번호 찾기로 발송된 코드 정보를 저장할 테이블
+CREATE TABLE test_code(
+	id VARCHAR(300),		-- 발신한 이메일
+	code char(5)			-- 이메일로 발신한 랜덤 코드
+);
+
+SELECT * FROM test_code;
+
+
+
+
 

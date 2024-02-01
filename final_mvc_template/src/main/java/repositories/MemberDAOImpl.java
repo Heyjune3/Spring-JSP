@@ -132,26 +132,120 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public boolean checkMember(String id, String name) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isCheck = false;
+		
+		String sql = "SELECT * FROM mvc_member WHERE id = ? AND name = ? ";
+		conn = DBCPUtil.getConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				isCheck = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBCPUtil.close(pstmt, conn);
+		}
+		return isCheck;
 	}
 
 	@Override
 	public void addPassCode(String id, String code) {
-		// TODO Auto-generated method stub
+		
+		conn = DBCPUtil.getConnection();
+		String sql = "SELECT * FROM test_code WHERE id = ? ";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			boolean isCheck = rs.next();
+			// 존재하는지 체크만 한 다음 자원해제
+			DBCPUtil.close(rs, pstmt);
+			if(isCheck) {
+				// 기존에 발급된 코드 존재 -> 새로운 코드로 수정
+				sql = "UPDATE test_code SET code = ? WHERE id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, code);
+				pstmt.setString(2, id);
+			}else {
+				// 기존에 발급된 코드 없음 -> 신규 등록
+											 //    id, code
+				sql = "INSERT INTO test_code VALUES(?,?)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setString(2, code);
+			}
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBCPUtil.close(rs,pstmt,conn);
+		}
 
 	}
 
 	@Override
 	public boolean checkPassCode(String id, String code) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isCheck = false;
+		String sql = "SELECT * FROM test_code WHERE id = ? AND code = ? ";
+		
+		conn = DBCPUtil.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, code);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				isCheck =true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBCPUtil.close(pstmt, conn, rs);
+		}
+		
+		return isCheck;
 	}
 
 	@Override
 	public void changePass(String id, String pass) {
-		// TODO Auto-generated method stub
-
+		
+		conn = DBCPUtil.getConnection();
+		String sql = "UPDATE mvc_member SET pass = ? WHERE id = ? ";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pass);
+			pstmt.setString(2, id);
+			int result = pstmt.executeUpdate();
+			if(result == 1) {
+				sql = "DELETE FROM test_code WHERE id = ?";
+				DBCPUtil.close(pstmt);
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBCPUtil.close(pstmt,conn);
+		}
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+

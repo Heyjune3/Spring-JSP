@@ -26,6 +26,9 @@ public class MemberController extends HttpServlet {
 		// 해당 서블릿으로 전달된 요청
 		System.out.println("mc - command : " + command);
 		
+		// cookie를 이용한 자동로그인 체크
+		MemberService.loginCheck(request);
+		
 		String view = "";
 		
 		if(command.equals("login.mc")) {
@@ -46,6 +49,9 @@ public class MemberController extends HttpServlet {
 			// 회원 탈퇴 요청 페이지 호출
 			// 비밀번호를 다시 입력받아 일치할 경우 탈퇴 처리
 			view = "/member/withdraw.jsp";
+		}else if(command.equals("findPass.mc")){
+			// 비밀번호 찾기 페이지 요청
+			view = "/member/findPass.jsp";
 		}else {
 			System.out.println("*.mc GET 방식으로 처리할 수 없는 요청");
 			response.sendError(405,"정상적인 요청이 아닙니다.");
@@ -80,6 +86,15 @@ public class MemberController extends HttpServlet {
 		}else if(command.equals("withdraw.mc")) {
 			System.out.println("회원 탈퇴 요청 처리 - POST");
 			ms.withDraw(request, response);
+		}else if(command.equals("findPass.mc")) {
+			// 이메일 아이디와 사용자 이름으로 비밀번호 찾기 메일 전송 요청 - POST
+			ms.findPassSubmit(request, response);
+		}else if(command.equals("passAccept.mc")){
+				// 메일을 통해서 email(id) 와 코드로 비밀번호 찾기 페이지 요청
+			ms.changePassCode(request, response);
+		}else if(command.equals("changePass.mc")){
+				// 새로운 비밀번호로 변경 요청
+			ms.changePass(request, response);
 		}else {
 			response.sendError(404);
 		}
