@@ -1,17 +1,15 @@
 package controller;
 
-import java.io.IOException;
-
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.MemberService;
 import util.FactoryUtil;
 
-/**
- * Servlet implementation class MainServlet
- */
+import java.io.IOException;
+
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -25,3 +23,14 @@ public class MainServlet extends HttpServlet {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+

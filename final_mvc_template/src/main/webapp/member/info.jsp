@@ -5,9 +5,7 @@
 <table class="info">
 	<tr>
 		<td>회원번호</td>
-		<td>
-			${member.num}
-		</td>
+		<td>${member.num}</td>
 	</tr>
 	<tr>
 		<td>아이디</td>
@@ -25,8 +23,12 @@
 		<td>성별</td>
 		<td>
 			<c:choose>
-				<c:when test="${member.gender eq 'male'}">남성</c:when>
-			<c:otherwise>여성</c:otherwise>
+				<c:when test="${member.gender eq 'male'}">
+					남성
+				</c:when>
+				<c:otherwise>
+					여성				
+				</c:otherwise>
 			</c:choose>
 		</td>
 	</tr>
@@ -38,7 +40,7 @@
 	</tr>
 	<tr>
 		<td colspan=2>
-			<input type="button" onclick="location.href='${context}';" value="메인" /> |
+			<input type="button" onclick="location.href='${context}';" value="메인" /> | 
 			<input type="button" onclick="withdraw('${member.id}');" value="회원탈퇴" />
 		</td>
 	</tr>

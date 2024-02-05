@@ -11,7 +11,7 @@ import jakarta.mail.PasswordAuthentication;
 public class GmailAuthentication extends Authenticator {
 	
 	private PasswordAuthentication passwordAuthentication;
-
+	
 	public GmailAuthentication() {
 		try {
 			Properties prop = new Properties();
@@ -26,14 +26,14 @@ public class GmailAuthentication extends Authenticator {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public PasswordAuthentication getPasswordAuthentication() {
 		return passwordAuthentication;
 	}
 	
 	public Properties getProp() {
 		Properties prop = new Properties();
-		prop.put("mail.smtp.host","smtp.gmail.com");
+		prop.put("mail.smtp.host", "smtp.gmail.com");
 		prop.put("mail.smtp.port", "587");
 		prop.put("mail.smtp.starttls.enable", "true");
 		prop.put("mail.smtp.auth", "true");
@@ -41,17 +41,6 @@ public class GmailAuthentication extends Authenticator {
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

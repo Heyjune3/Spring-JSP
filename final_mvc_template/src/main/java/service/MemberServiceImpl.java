@@ -40,9 +40,7 @@ public class MemberServiceImpl implements MemberService {
 			PrintWriter pw = response.getWriter();
 			pw.print("<script>");
 			
-			// /는 script에서 표현
 			String regex = "^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$";
-			
 			// 아이디가 이메일 형식인지 확인
 			if(Pattern.matches(regex, id)) {
 				System.out.println("이메일 형식 일치");
@@ -51,7 +49,6 @@ public class MemberServiceImpl implements MemberService {
 				pw.println("history.go(-1);");
 				pw.print("</script>");
 				return;
-				
 			}
 			
 			if(!pass.equals(rePass)) {
@@ -156,10 +153,11 @@ public class MemberServiceImpl implements MemberService {
 		String name = request.getParameter("name");
 		
 		// db mvc_member 테이블에서 id와 이름이 일치하는 사용자가 존재하는지 체크
-		boolean isCheck = dao.checkMember(id, name);
+		boolean isCheck =  dao.checkMember(id, name);
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = null;
+		
 		try {
 			out = response.getWriter();
 			if(!isCheck) {
@@ -182,11 +180,10 @@ public class MemberServiceImpl implements MemberService {
 			
 			// 메일 발송
 			GmailAuthentication ga = new GmailAuthentication();
-			Session session = Session.getDefaultInstance(ga.getProp(),ga);
-			// MimeMessage : 메일 발송 정보를 저장해줌
+			Session session = Session.getDefaultInstance(ga.getProp(), ga);
 			MimeMessage msg = new MimeMessage(session);
 			InternetAddress fromAddress = new InternetAddress(
-				"master@bitc.com","MASTER"	
+				"master@bitc.com","MASTER"
 			);
 			InternetAddress toAddress = new InternetAddress(id);
 			// 발송 시간
@@ -194,8 +191,7 @@ public class MemberServiceImpl implements MemberService {
 			msg.setHeader("Content-Type", "text/html;charset=utf-8");
 			msg.setRecipient(Message.RecipientType.TO, toAddress);
 			msg.setFrom(fromAddress);
-			msg.setSubject("비밀번호 찾기 요청","utf-8");
-			
+			msg.setSubject("비밀번호 찾기 요청", "utf-8");
 			StringBuilder mail = new StringBuilder();
 			mail.append("<!DOCType html>");
 			mail.append("<html>");
@@ -204,10 +200,9 @@ public class MemberServiceImpl implements MemberService {
 			mail.append("</head>");
 			mail.append("<body>");
 			mail.append("<h1> @@@ 사이트 비밀번호 찾기 이메일 인증! </h1>");
-			mail.append("<form action='http://10.100.205.95:8080");
+			mail.append("<form action='http://10.100.205.231:8080");
 			mail.append(request.getContextPath());
 			mail.append("/passAccept.mc' method='POST' ");
-								  //매개변수 open할 창, 이름
 			mail.append(" onsubmit='window.open(\"\",\"w\")' target='w'>");
 			mail.append("<input type='hidden' name='id' value='"+id+"'>");
 			mail.append("<input type='hidden' name='code' value='"+code+"'>");
@@ -230,36 +225,35 @@ public class MemberServiceImpl implements MemberService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			out.println("<script>");
-			out.println("alert('서비스에 문제가 있습니다. 다시 이용해주세요\\n"+e.getMessage()+"');");
+			out.println("alert('서비스에 문제가 있습니다.다시 이용해주세요.\\n"+e.getMessage()+"');");
 			out.println("location.href='login.mc';");
 			out.println("</script>");
-		}
+		} 
 	}
 
 	@Override
 	public void changePassCode(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id");			// email
+		String id = request.getParameter("id"); 		// email
 		String code = request.getParameter("code");		// code
-		System.out.println(id + " : " + code);
+		System.out.println(id+" : " +code);
 		
 		boolean isCheck = dao.checkPassCode(id, code);
 		try {
-		if(isCheck) {
-			System.out.println("일치");
-			request.setAttribute("id", id);
-			FactoryUtil.nextPage(request, response, "/member/changePass.jsp");
-		}else {
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter pw = response.getWriter();
-			pw.print("<script>");
-			pw.print("alert('잘못된 요청입니다.');");
-			pw.print("location.href='login.mc';");
-			pw.print("</script>");
-		}
+			if(isCheck) {
+				System.out.println("일치");
+				request.setAttribute("id", id);
+				FactoryUtil.nextPage(request, response, "/member/changePass.jsp");
+			}else {
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>");
+				pw.print("alert('잘못된 요청입니다.');");
+				pw.print("location.href='login.mc';");
+				pw.print("</script>");
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 	}
 
@@ -278,10 +272,10 @@ public class MemberServiceImpl implements MemberService {
 			pw.print("location.href='login.mc';");
 			pw.print("</script>");
 			
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 }
 

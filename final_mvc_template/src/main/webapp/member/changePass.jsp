@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- changePass.jsp -->
 <%@ include file="/common/header.jsp" %>
 <section>
 	<form action="changePass.mc" method="POST">
-		<input type="hidden" name="id" value="${id}" />
+		<input type="hidden" name="id" value="${id}"/>
 		<table>
 			<tr>
-				<th colspan="2">
+				<th colspan="2"> 
 					<h1>비밀번호 변경</h1>
 				</th>
 			</tr>
 			<tr>
-				<th colspan="2">
+				<th colspan="2"> 
 					새롭게 사용하실 비밀번호를 입력해 주세요.
 				</th>
 			</tr>
@@ -23,11 +24,17 @@
 			</tr>
 			<tr>
 				<th colspan="2">
-					<input type="submit" value="변경하러 가기" />
+					<input type="submit" value="변경하러 가기"/>
 				</th>
 			</tr>
 		</table>
 	</form>
 </section>
-
 <%@ include file="/common/footer.jsp" %>
+
+
+
+
+
+
+

@@ -116,7 +116,11 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public void withDrawMember(int num) {
-		String sql = "UPDATE mvc_member SET joinYN = 'N' , updatedate = now() WHERE num = ?";
+		String sql = "UPDATE mvc_member SET "
+					+"joinYN = 'N' , "
+					+"updatedate = now() "
+					+"WHERE num = ?";
+		
 		conn = DBCPUtil.getConnection();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -127,14 +131,13 @@ public class MemberDAOImpl implements MemberDAO {
 		}finally {
 			DBCPUtil.close(pstmt,conn);
 		}
-
 	}
 
 	@Override
 	public boolean checkMember(String id, String name) {
 		boolean isCheck = false;
 		
-		String sql = "SELECT * FROM mvc_member WHERE id = ? AND name = ? ";
+		String sql = "SELECT * FROM  mvc_member WHERE id = ? AND name = ? ";
 		conn = DBCPUtil.getConnection();
 		
 		try {
@@ -148,23 +151,22 @@ public class MemberDAOImpl implements MemberDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			DBCPUtil.close(pstmt, conn);
+			DBCPUtil.close(pstmt,conn);
 		}
 		return isCheck;
 	}
 
 	@Override
 	public void addPassCode(String id, String code) {
-		
 		conn = DBCPUtil.getConnection();
-		String sql = "SELECT * FROM test_code WHERE id = ? ";
+		String sql = "SELECT * FROM test_code WHERE id = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			boolean isCheck = rs.next();
-			// 존재하는지 체크만 한 다음 자원해제
+			
 			DBCPUtil.close(rs, pstmt);
 			if(isCheck) {
 				// 기존에 발급된 코드 존재 -> 새로운 코드로 수정
@@ -173,8 +175,7 @@ public class MemberDAOImpl implements MemberDAO {
 				pstmt.setString(1, code);
 				pstmt.setString(2, id);
 			}else {
-				// 기존에 발급된 코드 없음 -> 신규 등록
-											 //    id, code
+				// 기존에 발급된 코드 없음 - > 신규 등록
 				sql = "INSERT INTO test_code VALUES(?,?)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, id);
@@ -183,16 +184,15 @@ public class MemberDAOImpl implements MemberDAO {
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally{
 			DBCPUtil.close(rs,pstmt,conn);
 		}
-
 	}
 
 	@Override
 	public boolean checkPassCode(String id, String code) {
 		boolean isCheck = false;
-		String sql = "SELECT * FROM test_code WHERE id = ? AND code = ? ";
+		String sql = "SELECT * FROM test_code WHERE id = ? AND code = ?";
 		
 		conn = DBCPUtil.getConnection();
 		try {
@@ -201,14 +201,13 @@ public class MemberDAOImpl implements MemberDAO {
 			pstmt.setString(2, code);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				isCheck =true;
+				isCheck = true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			DBCPUtil.close(pstmt, conn, rs);
+		}finally{
+			DBCPUtil.close(rs,pstmt,conn);
 		}
-		
 		return isCheck;
 	}
 
@@ -235,16 +234,10 @@ public class MemberDAOImpl implements MemberDAO {
 		}finally {
 			DBCPUtil.close(pstmt,conn);
 		}
+		
 	}
 
 }
-
-
-
-
-
-
-
 
 
 

@@ -63,3 +63,8 @@ public interface MemberService extends FindPassService{
 		}
 	}
 }
+
+
+
+
+

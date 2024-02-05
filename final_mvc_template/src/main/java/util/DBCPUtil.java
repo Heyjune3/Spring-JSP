@@ -21,7 +21,7 @@ public interface DBCPUtil {
 			Context context = new InitialContext();
 			DataSource ds = (DataSource)context.lookup("java:comp/env/java/MySQL_DBCP");
 			conn = ds.getConnection();
-			System.out.println(conn);
+			// System.out.println(conn);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

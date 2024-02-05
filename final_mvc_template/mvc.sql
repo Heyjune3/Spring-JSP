@@ -19,14 +19,14 @@ VALUES('admin','admin','MASTER',0,'male');
 commit;
 
 -- 회원탈퇴 시
--- UPDATE mvc_member SET join = 'N' WHERE num = 회원번호;
+-- UPDATE mvc_member SET joinYN = 'N' WHERE num = 회원번호;
 commit;
 
 SELECT * FROM mvc_member ORDER BY num DESC;
 
 -- 관리자가 아니고 탈퇴한 회원이 아닌 정보 출력
 SELECT * FROM mvc_member 
-WHERE id != 'admin' AND join = 'Y' 
+WHERE id != 'admin' AND joinYN = 'Y' 
 ORDER BY num DESC;
 
 
@@ -91,11 +91,15 @@ CREATE TABLE IF NOT EXISTS qna(
 
 -- 비밀번호 찾기로 발송된 코드 정보를 저장할 테이블
 CREATE TABLE test_code(
-	id VARCHAR(300),		-- 발신한 이메일
-	code char(5)			-- 이메일로 발신한 랜덤 코드
+	id VARCHAR(300),			-- 발신한 이메일
+	code char(5)				-- 이메일로 발신한 랜덤 코드
 );
 
 SELECT * FROM test_code;
+
+
+SELECT * FROM qna;
+
 
 
 

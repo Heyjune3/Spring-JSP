@@ -86,14 +86,14 @@ public class MemberController extends HttpServlet {
 		}else if(command.equals("withdraw.mc")) {
 			System.out.println("회원 탈퇴 요청 처리 - POST");
 			ms.withDraw(request, response);
-		}else if(command.equals("findPass.mc")) {
-			// 이메일 아이디와 사용자 이름으로 비밀번호 찾기 메일 전송 요청 - POST
+		}else if(command.equals("findPass.mc")){
+			// 이메일 아이디와 사용자 이름 으로 비밀번호 찾기 메일 발송 요청 - POST
 			ms.findPassSubmit(request, response);
 		}else if(command.equals("passAccept.mc")){
-				// 메일을 통해서 email(id) 와 코드로 비밀번호 찾기 페이지 요청
+			// 메일을 통해서 email(id) 와 코드로 비밀번호 찾기 페이지 요청
 			ms.changePassCode(request, response);
 		}else if(command.equals("changePass.mc")){
-				// 새로운 비밀번호로 변경 요청
+			// 새로운 비밀번호로 변경 요청
 			ms.changePass(request, response);
 		}else {
 			response.sendError(404);

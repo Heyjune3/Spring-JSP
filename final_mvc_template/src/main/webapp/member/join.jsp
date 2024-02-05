@@ -62,7 +62,7 @@
 		var u_re_pass = document.getElementById("re_pass");
 		var u_age = form.age;
 		
-		var regexEmail =/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;       // 이메일
+		var regexEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;       // 이메일
 		
 		console.log(regexEmail.test(u_id.value));
 		
